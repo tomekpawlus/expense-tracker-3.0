@@ -1,14 +1,19 @@
 package com.tmpw.expenseTracker3.service;
 
 import com.tmpw.expenseTracker3.model.Category;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
 
 public interface CategoryService {
 
-    Page<Category> getAllCategories(Pageable page);
+    List<Category> getAllCategories();
+
+    Category getCategoryById(Long id);
+
     Category saveCategory(Category category);
+
     void deleteCategoryById(Long id);
+
     Category updateCategory(Long id, Category category);
 
 }

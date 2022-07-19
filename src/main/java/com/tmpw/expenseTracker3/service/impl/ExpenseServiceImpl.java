@@ -14,11 +14,15 @@ import java.util.List;
 @Service
 public class ExpenseServiceImpl implements ExpenseService {
 
+    // ====fields====
     private final ExpenseRepository expenseRepository;
 
+    // ====constructor====
     public ExpenseServiceImpl(ExpenseRepository expenseRepository) {
         this.expenseRepository = expenseRepository;
     }
+
+    // ====public methods====
 
     @Override
     public Page<Expense> getAllExpenses(Pageable page) {
@@ -27,23 +31,35 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Expense getExpenseById(Long id) {
-        return null;
+        return expenseRepository.findExpenseById(id);
     }
 
     @Override
     public void deleteExpenseById(Long id) {
-
+        Expense expense = expenseRepository.findExpenseById(id);
+        expenseRepository.delete(expense);
     }
 
     @Override
     public Expense saveExpenseDetails(Expense expense) {
-        return null;
+        return expenseRepository.save(expense);
+        
     }
 
     @Override
     public Expense updateExpenseDetails(Long id, Expense expense) {
-        return null;
+        Expense existingExpense = expenseRepository.findExpenseById(id);
+
+        existingExpense.setCategory(expense.getCategory() != null ? expense.getCategory() : existingExpense.getCategory());
+        existingExpense.setAmount(expense.getAmount() != null ? expense.getAmount() : existingExpense.getAmount());
+        existingExpense.setName(expense.getName() != null ? expense.getName() : existingExpense.getName());
+        existingExpense.setDescription(expense.getDescription() != null ? expense.getDescription() : existingExpense.getDescription());
+        existingExpense.setDate(expense.getDate() != null ? expense.getDate() : existingExpense.getDate());
+
+        return expenseRepository.save(existingExpense);
     }
+
+
 
     @Override
     public List<Expense> readByCategory(String category, Pageable page) {
