@@ -1,10 +1,11 @@
 package com.tmpw.expenseTracker3.service;
 
-import org.springframework.security.core.userdetails.User;
+import com.tmpw.expenseTracker3.dto.UserRegisterDto;
+import com.tmpw.expenseTracker3.model.User;
 
 public interface UserService {
 
-    User create (String name, String password);
+    User create (UserRegisterDto userRegister);
 
     User readUser();
 

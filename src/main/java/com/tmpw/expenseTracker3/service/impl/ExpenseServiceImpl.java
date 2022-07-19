@@ -1,7 +1,9 @@
 package com.tmpw.expenseTracker3.service.impl;
 
 
+import com.tmpw.expenseTracker3.model.Category;
 import com.tmpw.expenseTracker3.model.Expense;
+import com.tmpw.expenseTracker3.repository.CategoryRepository;
 import com.tmpw.expenseTracker3.repository.ExpenseRepository;
 import com.tmpw.expenseTracker3.service.ExpenseService;
 import org.springframework.data.domain.Page;
@@ -16,10 +18,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     // ====fields====
     private final ExpenseRepository expenseRepository;
+    private final CategoryRepository categoryRepository;
 
     // ====constructor====
-    public ExpenseServiceImpl(ExpenseRepository expenseRepository) {
+    public ExpenseServiceImpl(ExpenseRepository expenseRepository, CategoryRepository categoryRepository) {
         this.expenseRepository = expenseRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     // ====public methods====
@@ -42,6 +46,10 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Expense saveExpenseDetails(Expense expense) {
+        if(categoryRepository.findCategoryById(expense.getCategory().getId())==null){
+            Category newCategory = new Category(expense.getCategory().getId(), expense.getCategory().getName());
+            categoryRepository.save(newCategory);
+        }
         return expenseRepository.save(expense);
         
     }

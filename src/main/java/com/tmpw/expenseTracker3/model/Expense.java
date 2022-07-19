@@ -36,7 +36,6 @@ public class Expense {
     private String description;
 
     @Column(name = "expense_amount")
-    @NotEmpty(message = "Amount cannot be empty")
     private Double amount;
 
 

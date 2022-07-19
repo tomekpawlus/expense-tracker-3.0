@@ -1,9 +1,12 @@
 package com.tmpw.expenseTracker3.service.impl;
 
 
+import com.tmpw.expenseTracker3.dto.UserRegisterDto;
+import com.tmpw.expenseTracker3.exceptions.ItemAlreadyExistException;
+import com.tmpw.expenseTracker3.model.User;
 import com.tmpw.expenseTracker3.repository.UserRepository;
 import com.tmpw.expenseTracker3.service.UserService;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +22,14 @@ public class UserServiceImpl implements UserService {
 
     // ====public methods====
     @Override
-    public User create(String name, String password) {
-        return null;
+    public User create(UserRegisterDto userRegister) {
+        if(userRepository.existsByEmail(userRegister.getEmail())){
+            throw new ItemAlreadyExistException("User with email: "+ userRegister.getEmail() +" already exist.");
+        }
+        User newUser = new User();
+        BeanUtils.copyProperties(userRegister, newUser);
+
+        return newUser;
     }
 
     @Override
