@@ -1,10 +1,9 @@
 package com.tmpw.expenseTracker3.dto;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class LoginCredentials {
-    private String email;
+    private String username;
     private String password;
-
 }
