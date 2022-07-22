@@ -1,5 +1,6 @@
 package com.tmpw.expenseTracker3.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -49,6 +50,11 @@ public class Expense {
     @UpdateTimestamp
     private Timestamp updatedAt;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "category_id", referencedColumnName = "id", nullable = false)
