@@ -29,10 +29,6 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @GetMapping("/{id}")
-    public Category getCategoryById(@RequestParam Long id){
-        return categoryService.getCategoryById(id);
-    }
 
     @PostMapping
     public ResponseEntity<Category> saveCategory(@Valid @RequestBody Category category){
@@ -52,8 +48,8 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> updateCategory(@RequestBody Category category, @PathVariable Long id){
-        Category updatedCategory = categoryService.updateCategory(id, category);
+    public ResponseEntity<Category> updateCategory(@RequestBody String newName, @PathVariable String name){
+        Category updatedCategory = categoryService.updateCategory(name, newName);
 
         UriComponents uriComponents = UriComponentsBuilder
                 .fromHttpUrl("http://localhost:8080/category")

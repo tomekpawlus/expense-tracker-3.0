@@ -1,7 +1,6 @@
 package com.tmpw.expenseTracker3.service.impl;
 
 
-import com.tmpw.expenseTracker3.model.Category;
 import com.tmpw.expenseTracker3.model.Expense;
 import com.tmpw.expenseTracker3.repository.CategoryRepository;
 import com.tmpw.expenseTracker3.repository.ExpenseRepository;
@@ -46,12 +45,12 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Expense saveExpenseDetails(Expense expense) {
-        if(categoryRepository.findCategoryById(expense.getCategory().getId())==null){
-            Category newCategory = new Category(expense.getCategory().getId(), expense.getCategory().getName());
-            categoryRepository.save(newCategory);
-        }
-        return expenseRepository.save(expense);
-        
+//        if(categoryRepository.findCategoryById(expense.getCategory().getId())==null){
+//            Category newCategory = new Category(expense.getCategory().getId(), expense.getCategory().getName());
+//            categoryRepository.save(newCategory);
+//        }
+//        return expenseRepository.save(expense);
+        return null;
     }
 
     @Override

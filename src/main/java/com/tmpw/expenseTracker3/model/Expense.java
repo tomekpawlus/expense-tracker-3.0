@@ -38,7 +38,6 @@ public class Expense {
     @Column(name = "expense_amount")
     private Double amount;
 
-
     @NotNull
     private Date date;
 
