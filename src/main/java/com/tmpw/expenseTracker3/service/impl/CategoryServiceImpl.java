@@ -48,8 +48,8 @@ public class CategoryServiceImpl implements CategoryService {
     public Category updateCategory(String name, String newName) {
         Category existingCategory = categoryRepository
                 .findCategoryByName(name);
-        if(existingCategory.getUser().getId() == userService.getLoggedInUser().getId()
-        && categoryRepository.findCategoryByName(name)!=null){
+        if (existingCategory.getUser().getId() == userService.getLoggedInUser().getId()
+                && categoryRepository.findCategoryByName(name) != null) {
             existingCategory.setName(newName);
         }
         return categoryRepository
